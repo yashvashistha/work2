@@ -1,0 +1,29 @@
+.maindiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  border: 10px solid blue;
+}
+
+.maindiv button {
+  /* z-index: 1; */
+}
+
+.Popup {
+  display: none;
+  position: fixed;
+  background-color: rgba(242, 242, 242, 0.855);
+  /* background-color: aqua; */
+  width: 50%;
+  height: 50%;
+  /* left: 25%;
+  top: 25%; */
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  /* z-index: 5; */
+}
