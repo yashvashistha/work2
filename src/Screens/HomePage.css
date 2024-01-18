@@ -1,0 +1,144 @@
+.Hompage {
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 1);
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  position: relative;
+  border-style: none;
+}
+
+.Upload {
+  width: 95%;
+  height: 124px;
+  box-sizing: border-box;
+  border-bottom: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-self: center;
+}
+
+.Upload .div1 {
+  width: 76px;
+  height: 16px;
+  position: relative;
+  top: 8px;
+  left: 10px;
+}
+
+.Upload .div2 {
+  display: flex;
+  flex-direction: row;
+  display: flex;
+  justify-content: flex-start;
+  gap: 10%;
+}
+
+.Upload .div1 p {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16.1px;
+  position: relative;
+  top: 50%;
+}
+
+.DragandDropdiv {
+  max-width: 350px;
+  min-width: 30%;
+  height: 50px;
+  position: relative;
+  top: 50%;
+  border: 1px;
+  box-sizing: border-box;
+  border-style: dashed;
+  border-width: 1px;
+  border-color: rgba(217, 57, 84, 1);
+  /* text-align: center; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .DragandDropdiv p {
+} */
+
+.DropdownSubmit {
+  width: 100%;
+  max-width: 413.98px;
+  position: relative;
+  top: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 5%;
+}
+
+.DropdownSubmit p {
+  font-family: Arial;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0px;
+  text-align: left;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* .Upload select option {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgba(234, 236, 240, 1);
+}
+
+.Upload select option:checked {
+  background-color: rgba(246, 230, 230, 1);
+} */
+
+select {
+  max-width: 350px;
+  width: 70%;
+  height: 100%;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(217, 57, 84, 1);
+  text-align: center;
+}
+
+.DropdownSubmit button {
+  width: 25%;
+  position: relative;
+  top: 0px;
+  border: 10px, 52.5px, 10px, 52.5px;
+  background-color: rgba(217, 57, 84, 1);
+  border-style: none;
+  color: white;
+}
+
+@media screen and (max-width: 580px) {
+  .DragandDropdiv {
+    min-width: 25%;
+    height: 60px;
+  }
+  .DragandDropdiv p {
+    top: 25%;
+  }
+  .DropdownSubmit {
+    display: flex;
+    flex-direction: column;
+    top: 0%;
+  }
+  .DropdownSubmit p {
+    justify-content: center;
+  }
+  .DropdownSubmit select {
+    width: 100%;
+    min-height: 70%;
+  }
+  .DropdownSubmit button {
+    width: 50%;
+    min-height: 50%;
+    left: 25%;
+  }
+}

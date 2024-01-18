@@ -1,0 +1,70 @@
+.topbar {
+  height: 46px;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 2px solid rgba(217, 57, 84, 1);
+  background-color: rgba(255, 255, 255, 1);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.pdficon {
+  width: 167px;
+  height: 25px;
+  top: 10.5px;
+  left: 16px;
+  gap: 12px;
+}
+
+.pdficon p {
+  width: 122px;
+  height: 14px;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 13.8px;
+  position: relative;
+  top: 50%;
+}
+
+.adminicon {
+  width: 109px;
+  height: 18px;
+  gap: 0px;
+  top: 14px;
+  right: 10px;
+}
+
+.adminicon p {
+  width: 81px;
+  height: 16px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16.1px;
+}
+
+.topbar div {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: 10%;
+}
+
+@media screen and (max-width: 360px) {
+  .topbar div {
+    display: flex;
+    flex-direction: column;
+    top: 2px;
+    gap: 5px;
+    justify-content: space-between;
+  }
+
+  .topbar div p {
+    top: 0px;
+  }
+
+  .topbar div img {
+    position: relative;
+    left: 25%;
+  }
+}
