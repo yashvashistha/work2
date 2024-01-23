@@ -6,6 +6,7 @@ import HomePage from "./Screens/HomePage";
 import ChatPage from "./Screens/ChatPage";
 import "./App.css";
 import DragAndDrop from "./Screens/DragandDrop";
+import DropDown from "./Screens/DropDown";
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
             <Route path="/" exact element={<HomePage />} />
             <Route path="/chat" element={<ChatPage />} />
 
-            <Route path="/topbar2" element={<DragAndDrop />} />
+            {/* <Route path="/topbar2" element={<Table2 />} /> */}
           </Routes>
         </div>
       </BrowserRouter>

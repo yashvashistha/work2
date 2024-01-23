@@ -11,7 +11,7 @@
 
 .Upload {
   width: 95%;
-  height: 124px;
+  min-height: 124px;
   box-sizing: border-box;
   border-bottom: 1px solid black;
   display: flex;
@@ -22,7 +22,7 @@
 
 .Upload .div1 {
   width: 76px;
-  height: 16px;
+  min-height: 16px;
   position: relative;
   top: 8px;
   left: 10px;
@@ -55,14 +55,10 @@
   border-style: dashed;
   border-width: 1px;
   border-color: rgba(217, 57, 84, 1);
-  /* text-align: center; */
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-/* .DragandDropdiv p {
-} */
 
 .DropdownSubmit {
   width: 100%;
@@ -87,12 +83,19 @@
   align-items: center;
 }
 
-/* .Upload select option {
-  background-color: rgb(255, 255, 255);
-  border: 1px solid rgba(234, 236, 240, 1);
+.opt {
+  width: 100%;
+  height: 100px;
 }
 
-.Upload select option:checked {
+/* .Upload select option {
+  width: 100%;
+  height: 20px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgba(234, 236, 240, 1);
+} */
+
+/* .Upload select option:checked {
   background-color: rgba(246, 230, 230, 1);
 } */
 
@@ -106,7 +109,7 @@ select {
   text-align: center;
 }
 
-.DropdownSubmit button {
+.subbtn {
   width: 25%;
   position: relative;
   top: 0px;
