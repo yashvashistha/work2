@@ -2,32 +2,178 @@ import React, { useEffect, useRef, useState } from "react";
 import "../App.css";
 import Table from "./Table";
 import "./HomePage.css";
-import { UploadButton } from "@bytescale/upload-widget-react";
 import axios from "axios";
-import { json } from "react-router-dom";
-import { type } from "@testing-library/user-event/dist/type";
-import DragAndDrop from "./DragandDrop";
-import DropDown from "./DropDown";
-
-const options = {
-  apiKey: "free",
-  maxFileCount: 1,
-};
+// import DragAndDrop from "./DragandDrop";
+// import DropDown from "./DropDown";
 
 function HomePage() {
-  // const optionsvalue = [
-  //   { name: "Bill Of Entry", sname: "BOE" },
-  //   { name: "Shipping Bill", sname: "SB" },
-  //   { name: "Checklist Bill Of Entry", sname: "CHKBOE" },
-  //   { name: "", sname: "" },
-  //   { name: "", sname: "" },
-  //   { name: "", sname: "" },
-  //   { name: "", sname: "" },
-  //   { name: "", sname: "" },
-  //   { name: "", sname: "" },
-  //   { name: "", sname: "" },
+  const [selectedoption, setSelectedOption] = useState("");
+  const [file, setFile] = useState(null);
+  const [filename, setFileName] = useState(null);
+  const [filetype, setFileType] = useState(null);
+  const fileinputref = useRef(null);
+  const ddref = useRef(null);
+  const innerhtml1 =
+    '<p>Click to upload</p><p>Drag and Drop to upload</p><input type="file" style="display: none;">';
+  const innerhtml2 = "<p></p>";
+  const posturl =
+    "https://pyrtqap426.execute-api.ap-south-1.amazonaws.com/navigate-pdf-parser/upload_pdf";
 
-  // ];
+  const handleDragEnter = (e) => {
+    e.preventDefault();
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    uploadfilehander(e.dataTransfer.files[0]);
+  };
+
+  const openinputhandler = () => {
+    fileinputref.current.click();
+  };
+
+  const hiddenuploadhandler = (e) => {
+    const selectedFile = e.target.files[0];
+    uploadfilehander(selectedFile);
+  };
+
+  const uploadfilehander = async (tempfile) => {
+    ddref.current.innerHTML = innerhtml2;
+    ddref.current.innerText = tempfile.name;
+    setFile(tempfile);
+    setFileName(tempfile.name);
+    setFileType(tempfile.type);
+  };
+
+  const selectchangehandle = (e) => {
+    const value = e.target.value;
+    setSelectedOption(value);
+  };
+
+  const uploadbtnhandle = async () => {
+    const binaryfile = await convertBinaryfunc(file);
+    console.log(binaryfile);
+    // uploadfileapi(binaryfile);
+  };
+
+  const convertBinaryfunc = async (filepdf) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsBinaryString(filepdf);
+      // fileReader.readAsArrayBuffer(filepdf);
+      // fileReader.readAsArrayBuffer(filepdf);
+      // fileReader.readAsDataURL(filepdf);
+
+      fileReader.onload = (e) => {
+        const blobData = new Blob([e.target.result], {
+          type: "application/pdf",
+        });
+        console.log(blobData);
+        uploadfileapi(blobData);
+        // console.log(e.target.result);
+        // console.log(fileReader.result);
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+
+  const uploadfileapi = async (bfile) => {
+    if (file === null) {
+      alert("Upload a File");
+      return;
+    }
+    if (file.type !== "application/pdf") {
+      alert("Only PDF Files are allowed");
+      return;
+    }
+    console.log(bfile);
+
+    // try {
+    //   const response = await fetch(posturl, {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/pdf",
+    //       filetype: "SB",
+    //       "x-api-key": "doVk3aPq1i8Y5UPpnw3OO4a610LK2yFrahOpYEo0",
+    //       customerid: "1",
+    //     },
+    //     body: bfile,
+    //   });
+
+    //   if (!response.ok) {
+    //     throw new Error("Network response was not ok");
+    //   }
+
+    //   const data = response;
+    //   console.log("Post successful:", data);
+    // } catch (error) {
+    //   console.error("Error posting data:", error);
+    // }
+
+    // let config = {
+    //   method: "post",
+    //   maxBodyLength: Infinity,
+    //   url: "https://pyrtqap426.execute-api.ap-south-1.amazonaws.com/navigate-pdf-parser/upload_pdf",
+    //   headers: {
+    //     "Content-Type": "application/pdf",
+    //     filetype: "SB",
+    //     "x-api-key": "doVk3aPq1i8Y5UPpnw3OO4a610LK2yFrahOpYEo0",
+    //     customerid: "1",
+    //   },
+    //   data: bfile,
+    // };
+
+    // axios
+    //   .request(config)
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    console.log(filetype, selectedoption);
+
+    // const dfile = new FormData();
+    // dfile.append("file", bfile);
+
+    try {
+      const response = axios({
+        method: "post",
+        url: posturl,
+        headers: {
+          "Content-Type": "application/pdf",
+          filetype: selectedoption,
+          customerid: 1,
+          "x-api-key": "doVk3aPq1i8Y5UPpnw3OO4a610LK2yFrahOpYEo0",
+        },
+        data: bfile,
+        maxBodyLength: Infinity,
+      });
+      // const response = await axios.post(posturl, null, {
+      //   params: {},
+      //   headers: {
+      //     Content_Type: filetype,
+      //     filetype: selectedoption,
+      //     customerid: 1,
+      //     x_api_key: "doVk3aPq1i8Y5UPpnw3OO4a610LK2yFrahOpYEo0",
+      //   },
+      //   body: bfile,
+      // });
+      ddref.current.innerHTML = innerhtml1;
+      setFile(null);
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <div className="Hompage">
       <div className="Upload">
@@ -35,13 +181,29 @@ function HomePage() {
           <p>Upload File</p>
         </div>
         <div className="div2">
-          <div className="DragandDropdiv">
-            <DragAndDrop />
+          <div
+            className="DragandDropdiv"
+            onDragEnter={handleDragEnter}
+            onDragOver={handleDragOver}
+            onDrop={handleDrop}
+            onClick={openinputhandler}
+            style={{ display: "flex", flexDirection: "column" }}
+            ref={ddref}
+          >
+            <p>Click to upload</p>
+            <p>Drag and Drop to upload</p>
+            {/* Hidden file input from here */}
+            <input
+              type="file"
+              ref={fileinputref}
+              style={{ display: "none" }}
+              onChange={hiddenuploadhandler}
+            />
+            {/* Hidden file input to here  */}
           </div>
           <div className="DropdownSubmit">
             <p style={{ textWrap: "nowrap" }}>File Type</p>
-            {/* <DropDown /> */}
-            <select>
+            <select value={selectedoption} onChange={selectchangehandle}>
               <option value="BOE">Bill Of Entry</option>
               <option value="SB">Shipping Bill</option>
               <option value="CHKBOE">Checklist Bill Of Entry</option>
@@ -63,7 +225,9 @@ function HomePage() {
               <option value="DD">Delivery Detail</option>
               <option value="PI">Purchase Invoice</option>
             </select>
-            <button className="subbtn">Submit</button>
+            <button className="subbtn" onClick={uploadbtnhandle}>
+              Submit
+            </button>
           </div>
         </div>
       </div>
